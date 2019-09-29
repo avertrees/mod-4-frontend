@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 class Track extends Component {
+    // album:name: "ALBUM"
     render() {
         return (
             <div>

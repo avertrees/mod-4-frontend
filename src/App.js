@@ -12,22 +12,14 @@ class App extends Component {
     super();
     this.state = {
       token: null,
-      item: {
-        album: {
-          images: [{ url: "" }]
-        },
-        name: "",
-        artists: [{ name: "" }],
-        duration_ms:0,
-      },
-      is_playing: "Paused",
-      progress_ms: 0,
       short_term_tracks:[],
-      long_term_tracks:[]
+      long_term_tracks:[],
+      me:{},
+      users:[]
     };
-    // this.getCurrentlyPlaying = this.getCurrentlyPlaying.bind(this);
     this.getShortTermTracks = this.getShortTermTracks.bind(this);
     this.getLongTermTracks = this.getLongTermTracks.bind(this);
+    this.fetchUserOnLogin = this.fetchUserOnLogin.bind(this);
   }
 
   componentDidMount() {
@@ -41,10 +33,26 @@ class App extends Component {
       });
       this.getShortTermTracks(_token);
       this.getLongTermTracks(_token)
+      this.fetchUserOnLogin(_token);
       //this.getNextTop50Tracks(_token)
     }
   }
 
+  fetchUserOnLogin(token){
+    $.ajax({
+      url: "https://api.spotify.com/v1/me",
+      type: "GET",
+      beforeSend: (xhr) => {
+        xhr.setRequestHeader("Authorization", "Bearer " + token);
+      },
+      success: (data) => {
+        console.log("data", data);
+        this.setState({
+          me: data
+        });
+      }
+    });
+  }
   getShortTermTracks(token) {
     // Make a call using the token
     $.ajax({
@@ -74,25 +82,6 @@ class App extends Component {
         console.log("data", data);
         this.setState({
           long_term_tracks: data.items
-        });
-      }
-    });
-  }
-
-  getCurrentlyPlaying(token) {
-    // Make a call using the token
-    $.ajax({
-      url: "https://api.spotify.com/v1/me/player",
-      type: "GET",
-      beforeSend: (xhr) => {
-        xhr.setRequestHeader("Authorization", "Bearer " + token);
-      },
-      success: (data) => {
-        console.log("data", data);
-        this.setState({
-          item: data.item,
-          is_playing: data.is_playing,
-          progress_ms: data.progress_ms,
         });
       }
     });
