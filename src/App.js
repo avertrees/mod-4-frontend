@@ -6,6 +6,7 @@ import hash from "./hash";
 import TracksContainer from "./TracksContainer";
 import logo from "./logo.svg";
 import "./App.css";
+import UserContainer from "./UserContainer"
 
 class App extends Component {
   constructor() {
@@ -37,14 +38,17 @@ class App extends Component {
       this.getLongTermTracks(_token)
       this.fetchUserOnLogin(_token);
       //this.getNextTop50Tracks(_token)
-      //make fetch post to backend here to input User Data??? 
+      //make fetch post to backend here to input User Data???
 
     }
   }
 
   postUser = () => {
     console.log(this.state.me)
-    console.log(this.state.me.images[0].url)
+    let image_url = ""
+    if (this.state.me.images.length>0){
+      let image_url = this.state.me.images[0].url
+    }
     fetch("http://localhost:3001/users", {
       method: "POST",
       headers: {
@@ -53,7 +57,7 @@ class App extends Component {
       },
       body: JSON.stringify({
         name: this.state.me.display_name,
-        image_url: this.state.me.images[0].url,
+        image_url: image_url,
         spotify_id: this.state.me.id
       })
     })
@@ -65,7 +69,6 @@ class App extends Component {
   postTracks = () => {
     let user_id = this.state.me.id
     this.state.all_tracks.flat().forEach(e => {
-      console.log(user_id)
       fetch("http://localhost:3001/top100_tracks", {
         method: "POST",
         headers: {
@@ -74,7 +77,12 @@ class App extends Component {
         },
         body: JSON.stringify({
           spotify_id: e.id,
-          user_id: user_id
+          album_name: e.album.name,
+          album_id: e.album.id,
+          artist_name: e.artists[0].name,
+          artist_id: e.artists[0].id,
+          name: e.name,
+          user_id: user_id,
         })
       })
 
@@ -133,111 +141,7 @@ class App extends Component {
       }
     });
   }
-  // componentDidMount() {
-  //   // Set token
-  //   let _token = hash.access_token;
 
-  //   if (_token) {
-  //     // Set token
-  //     this.setState({
-  //       token: _token
-  //     },()=>{console.log("hello")})
-  //     this.getShortTermTracks(_token);
-  //     this.getLongTermTracks(_token)
-  //     this.fetchUserOnLogin(_token);
-  //     //this.getNextTop50Tracks(_token)
-  //     //make fetch post to backend here to input User Data??? 
-
-  //   }
-  // }
-
-  //   postUser = () => {
-  //     fetch("http://localhost:3001/users", {
-  //         method: "POST",
-  //         headers: {
-  //             "Content-Type": "application/json",
-  //             "Accept": "application/json"
-  //         },
-  //         body: JSON.stringify({
-  //             name: this.state.me.display_name,
-  //             spotify_id: this.state.me.id
-  //         })
-  //     })
-  //     .then(res => res.json())
-  //     .then(console.log)
-  //     .catch(err => alert(err));
-  //   }
-
-  //   postTracks = () => {
-  //     let user_id = this.state.me.id
-  //     this.state.all_tracks.flat().forEach(e => {
-  //       console.log(user_id)
-  //       fetch("http://localhost:3001/top100_tracks", {
-  //         method: "POST",
-  //           headers: {
-  //               "Content-Type": "application/json",
-  //               "Accept": "application/json"
-  //           },
-  //           body: JSON.stringify({
-  //               spotify_id: e.id,
-  //               user_id: user_id
-  //           })
-  //       })
-
-  //     })
-
-  //   }
-
-  //   fetchUserOnLogin(token){
-  //     $.ajax({
-  //       url: "https://api.spotify.com/v1/me",
-  //       type: "GET",
-  //       beforeSend: (xhr) => {
-  //         xhr.setRequestHeader("Authorization", "Bearer " + token);
-  //       },
-  //       success: (data) => {
-  //         this.setState({
-  //           me: data
-  //         });
-  //       }
-  //     })
-  //     .then((data)=>this.postUser())
-  //     ;
-  //   }
-
-
-  // getShortTermTracks(token) {
-  //   // Make a call using the token
-  //   $.ajax({
-  //     url: "https://api.spotify.com/v1/me",
-  //     type: "GET",
-  //     beforeSend: (xhr) => {
-  //       xhr.setRequestHeader("Authorization", "Bearer " + token);
-  //     },
-  //     success: (data) => {
-  //       this.setState({
-  //         short_term_tracks:data.items,
-  //         all_tracks: [...this.state.all_tracks, data.items]
-  //       });
-  //     }
-  //   });
-  // }
-  // getShortTermTracks(token) {
-  //   // Make a call using the token
-  //   $.ajax({
-  //     url: "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=50",
-  //     type: "GET",
-  //     beforeSend: (xhr) => {
-  //       xhr.setRequestHeader("Authorization", "Bearer " + token);
-  //     },
-  //     success: (data) => {
-  //       this.setState({
-  //         long_term_tracks: data.items,
-  //         all_tracks: [...this.state.all_tracks, data.items]
-  //       },()=>{this.postTracks()});
-  //     }
-  //   });
-  // }
 
   render() {
     return (
@@ -255,7 +159,11 @@ class App extends Component {
             </a>
           )}
           {this.state.token && (
+            <div>
+            <h1>Hello</h1>
+            <UserContainer currentUserId={this.state.me.id}/>
             <TracksContainer short_term_tracks={this.state.short_term_tracks} long_term_tracks={this.state.long_term_tracks} />
+            </div>
         )}
         </header>
       </div>
