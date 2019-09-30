@@ -103,7 +103,7 @@ class App extends Component {
   getShortTermTracks(token) {
     // Make a call using the token
     $.ajax({
-      url: "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=50",
+      url: "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=50",
       type: "GET",
       beforeSend: (xhr) => {
         xhr.setRequestHeader("Authorization", "Bearer " + token);
