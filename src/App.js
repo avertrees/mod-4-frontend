@@ -9,9 +9,9 @@ import "./App.css";
 import UserContainer from "./UserContainer"
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
+  // constructor() {
+    // super();
+    state = {
       token: null,
       short_term_tracks:[],
       long_term_tracks:[],
@@ -20,10 +20,10 @@ class App extends Component {
       all_tracks:[]
     };
     //What is this doing????????????????????????
-    this.getShortTermTracks = this.getShortTermTracks.bind(this);
-    this.getLongTermTracks = this.getLongTermTracks.bind(this);
-    this.fetchUserOnLogin = this.fetchUserOnLogin.bind(this);
-  }
+  //   this.getShortTermTracks = this.getShortTermTracks.bind(this);
+  //   this.getLongTermTracks = this.getLongTermTracks.bind(this);
+  //   this.fetchUserOnLogin = this.fetchUserOnLogin.bind(this);
+  // }
 
   componentDidMount() {
     // Set token
@@ -44,7 +44,7 @@ class App extends Component {
   }
 
   postUser = () => {
-    console.log(this.state.me)
+    //console.log(this.state.me)
     let image_url = ""
     if (this.state.me.images.length>0){
       image_url = this.state.me.images[0].url
@@ -90,7 +90,7 @@ class App extends Component {
 
   }
 
-  fetchUserOnLogin(token) {
+  fetchUserOnLogin = (token) => {
     $.ajax({
       url: "https://api.spotify.com/v1/me",
       type: "GET",
@@ -108,7 +108,7 @@ class App extends Component {
   }
 
 
-  getShortTermTracks(token) {
+  getShortTermTracks = (token) => {
     // Make a call using the token
     $.ajax({
       url: "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=50",
@@ -125,7 +125,7 @@ class App extends Component {
     });
   }
 
-  getLongTermTracks(token) {
+  getLongTermTracks = (token) => {
     // Make a call using the token
     $.ajax({
       url: "https://api.spotify.com/v1/me/top/tracks?time_range=long_term&limit=50",

@@ -25,6 +25,7 @@ export default class UserContainer extends Component {
   // }
 
   render(){
+    console.log("user ID from props", this.props.currentUserId)
     return(
       <div>
       {this.state.users.map(user=> <UserCard currentUserId={this.props.currentUserId} user={user}/>)}

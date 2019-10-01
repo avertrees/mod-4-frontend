@@ -13,7 +13,7 @@ export default class UserCard extends Component {
 
 
   retrieveStats = () => {
-    console.log(this.props.currentUserId)
+    console.log("current user ID", this.props.currentUserId)
     fetch(`http://localhost:3001/users/${this.state.rails_user_id}/compare`, {
       method: "POST",
       headers: {
