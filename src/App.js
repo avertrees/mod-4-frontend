@@ -8,6 +8,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import UserContainer from "./UserContainer"
 
+
 class App extends Component {
     state = {
       token: null,
@@ -30,7 +31,7 @@ class App extends Component {
       this.setState({
         token: _token
       }, () => this.fetchUserOnLogin())
-      
+
       //this.fetchUserOnLogin(_token);
       //this.getNextTop50Tracks(_token)
       //make fetch post to backend here to input User Data???
@@ -69,10 +70,10 @@ class App extends Component {
     let display_name = "tom"
     if (this.state.me.images.length>0){
       image_url = this.state.me.images[0].url
-    } 
+    }
     if (this.state.me.display_name !== this.state.me.id) {
       display_name = this.state.me.display_name
-    } 
+    }
     fetch("http://localhost:3001/users", {
       method: "POST",
       headers: {
@@ -146,6 +147,7 @@ class App extends Component {
           album_id: e.album.id,
           artist_name: e.artists[0].name,
           artist_id: e.artists[0].id,
+          album_image: e.album.images[0].url,
           name: e.name,
           user_id: user_id,
         })

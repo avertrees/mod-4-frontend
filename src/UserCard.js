@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import CardFront from './CardFront'
+import CardBack from './CardBack'
 
 export default class UserCard extends Component {
 
@@ -8,7 +10,9 @@ export default class UserCard extends Component {
     rails_user_id: this.props.user.id,
     shared_albums: [],
     shared_tracks: [],
-    shared_artists: []
+    shared_artists: [],
+    front: true,
+    filter: "shared_artists"
   }
 
 
@@ -28,6 +32,7 @@ export default class UserCard extends Component {
     .then(resp=>resp.json())
     .then(data => {
       this.setState({
+        //need to change this on backend so that theres a key for image AND name in each object
         shared_albums: data.shared_albums,
         shared_tracks: data.shared_tracks,
         shared_artists: data.shared_artists
@@ -55,16 +60,31 @@ export default class UserCard extends Component {
     return null
   }
 
+  frontBackSwitch = () => {
+    let newState = this.state.front ? false : true
+    this.setState({
+      front: newState
+    })
+  }
+  //should we put the conditional in here?
+
+  //pass in props from here to card front vs card back?
+
+  frontOrBack = () => {
+    if (this.state.front){
+      return <CardFront shared_albums={this.state.shared_albums} shared_artists={this.state.shared_artists}
+      shared_tracks={this.state.shared_tracks} user={this.props.user} renderEntity={this.renderEntity}
+      switch={this.frontBackSwitch}/>
+    } else {
+      return <CardBack switch={this.frontBackSwitch} shared_albums={this.state.shared_albums} shared_artists={this.state.shared_artists}
+      shared_tracks={this.state.shared_tracks} user={this.props.user} currentFilter={this.state.filter} />
+    }
+  }
+
   render(){
     return(
-      <div>
-      <h1>{this.props.user.name}</h1>
-      <h3>Number of shared albums: {this.state.shared_albums.length}</h3>
-      {this.renderEntity("shared_albums")}
-      <h3>Number of shared artists: {this.state.shared_artists.length}</h3>
-      {this.renderEntity("shared_artists")}
-      <h3>Number of shared tracks: {this.state.shared_tracks.length}</h3>
-      {this.renderEntity("shared_tracks")}
+      <div className="ui column">
+      {this.frontOrBack()}
       </div>
     )
   }

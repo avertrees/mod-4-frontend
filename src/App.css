@@ -1,3 +1,17 @@
+.ui.card{
+  align-items: center;
+  background-color: #333;
+}
+
+.circular--square {
+  width: 220px;
+  height: 220px;
+  border-top-left-radius: 50% 50%;
+  border-top-right-radius: 50% 50%;
+  border-bottom-right-radius: 50% 50%;
+  border-bottom-left-radius: 50% 50%;
+}
+
 .App {
   text-align: center;
 }
