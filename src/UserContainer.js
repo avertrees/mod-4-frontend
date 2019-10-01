@@ -4,7 +4,8 @@ import UserCard from "./UserCard"
 export default class UserContainer extends Component {
 
   state = {
-    users: []
+    users: [],
+    filterBy: null
   }
 
   fetchAllUsers = () => {
