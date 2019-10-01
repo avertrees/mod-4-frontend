@@ -47,7 +47,7 @@ class App extends Component {
     console.log(this.state.me)
     let image_url = ""
     if (this.state.me.images.length>0){
-      let image_url = this.state.me.images[0].url
+      image_url = this.state.me.images[0].url
     }
     fetch("http://localhost:3001/users", {
       method: "POST",
@@ -144,6 +144,7 @@ class App extends Component {
 
 
   render() {
+    console.log(this.state)
     return (
       <div className="App">
         <header className="App-header">
