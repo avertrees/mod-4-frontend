@@ -12,12 +12,11 @@ export default class UserCard extends Component {
     shared_tracks: [],
     shared_artists: [],
     front: true,
-    filter: "shared_artists"
+    filter: "shared_tracks"
   }
 
 
   retrieveStats = () => {
-    console.log("current user ID", this.props.currentUserId)
     fetch(`http://localhost:3001/users/${this.state.rails_user_id}/compare`, {
       method: "POST",
       headers: {
@@ -31,6 +30,7 @@ export default class UserCard extends Component {
     })
     .then(resp=>resp.json())
     .then(data => {
+      console.log(data)
       this.setState({
         //need to change this on backend so that theres a key for image AND name in each object
         shared_albums: data.shared_albums,
