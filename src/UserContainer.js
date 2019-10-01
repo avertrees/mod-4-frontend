@@ -27,8 +27,10 @@ export default class UserContainer extends Component {
   render(){
     //console.log("user ID from props", this.props.currentUserId)
     return(
-      <div>
-      {this.props.allUsers.map(user=> user.spotify_id !== this.props.currentUserId? <UserCard currentUserId={this.props.currentUserId} user={user}/> : null )}
+      <div className="ui four column grid">
+        <div className="row">
+          {this.props.allUsers.map(user => user.spotify_id !== this.props.currentUserId ? <UserCard currentUserId={this.props.currentUserId} user={user} /> : null)}
+        </div>
       </div>
     )
   }
