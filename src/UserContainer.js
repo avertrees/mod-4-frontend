@@ -24,7 +24,9 @@ export default class UserContainer extends Component {
       <div className="ui four column grid">
       {/*<div><button onClick={this.deleteUser}className="ui right button floated">delete me from the app</button></div>*/}
         <div className="row">
-          {this.props.allUsers.map(user => user.spotify_id !== this.props.currentUserId ? <UserCard key={user.id} currentUserId={this.props.currentUserId} tracks={this.props.tracks} user={user} /> : null)}
+          <div className="ui cards">
+            {this.props.allUsers.map(user => user.spotify_id !== this.props.currentUserId ? <UserCard key={user.id} currentUserId={this.props.currentUserId} tracks={this.props.tracks} user={user} /> : null)}
+          </div>
         </div>
       </div>
       </>

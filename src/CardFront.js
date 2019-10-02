@@ -4,13 +4,22 @@ export default class CardFront extends Component {
   render(){
     return (
       <div className="ui card" onClick={this.props.switch}>
-      <h1>{this.props.user.name}</h1>
-      <img className="circular--square" src={this.props.user.image_url} alt={this.props.user.name} />
-      <span>Number of shared albums: {this.props.shared_albums.length}</span>
+        <img class="image circular--square" src={this.props.user.image_url} alt={this.props.user.name} /> 
+      <div className="content">
+        <div className="header">{this.props.user.name} </div>
+      </div>
+      {/* <span>Number of shared albums: {this.props.shared_albums.length}</span>
       <span>Number of shared artists: {this.props.shared_artists.length}</span>
-      <span>Number of shared tracks: {this.props.shared_tracks.length}</span>
-      <span>click to flip</span>
-       </div>
+      <span>Number of shared tracks: {this.props.shared_tracks.length}</span> */}
+      {/* <span>click to flip</span> */}
+      <div className="extra content">
+        <div class="ui fluid buttons">
+            {this.props.shared_artists.length > 0 ? <button className="ui button">Artists ({this.props.shared_artists.length}) </button> : null}
+            {this.props.shared_albums.length > 0 ? <button className="ui button">Albums ({this.props.shared_albums.length}) </button> : null}
+            {this.props.shared_tracks.length > 0 ? <button  className="ui button">Tracks ({this.props.shared_tracks.length})</button> : null}
+        </div>
+      </div>
+      </div>
     )
   }
 }

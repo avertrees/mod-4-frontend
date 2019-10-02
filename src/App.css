@@ -1,18 +1,32 @@
-.ui.cards>.card{
+.ui.card,.ui.cards>.card{
   align-items: center;
   background-color: #282c34;
   color: white;
   background: #282c34;
-
+  box-shadow: 0 1px 3px 0 #1db954, 0 0 0 1px #1db954;
+  /* box-shadow:7 1px 3px 0 #1db954, 0 0 0 1px #1db954; */
+}
+.ui.horizontal.bulleted.list{
+  background-color: #1db954
+}
+.ui.button{
+  background:#1db954
+}
+.ui.card>:first-child, .ui.cards>.card>:first-child{
+margin-top: .75em;
 }
 
-.circular--square {
+.ui.card>.image, .ui.cards>.card>.image.circular--square {
   width: 220px;
   height: 220px;
-  border-top-left-radius: 50% 50%;
-  border-top-right-radius: 50% 50%;
-  border-bottom-right-radius: 50% 50%;
-  border-bottom-left-radius: 50% 50%;
+  border-top-left-radius: 50% 50% !important;
+  border-top-right-radius: 50% 50% !important;
+  border-bottom-right-radius: 50% 50% !important;
+  border-bottom-left-radius: 50% 50% !important;
+}
+
+.ui.card>.content>.header,.ui.cards>.card>.content>.header{
+      color: #1db954;
 }
 
 .App {
@@ -20,7 +34,7 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
+  animation: App-logo-spin infinite .3s linear;
   height: 40vmin;
   pointer-events: none;
 }
@@ -75,8 +89,8 @@ body {
 .btn {
   background-color: transparent;
   border-radius: 2em;
-  border: 0.2em solid #1ecd97;
-  color: #1ecd97;
+  border: 0.2em solid #1db954;
+  color: #1db954;
   cursor: pointer;
   font-size: 3vmin;
   padding: 0.7em 1.5em;

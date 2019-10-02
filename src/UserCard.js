@@ -84,9 +84,9 @@ export default class UserCard extends Component {
   render(){
     console.log("ID PASSED DOWN",this.props.railsID)
     return(
-      <div className="ui cards">
+      <>
       {this.frontOrBack()}
-      </div>
+      </>
     )
   }
 }

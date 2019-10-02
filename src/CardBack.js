@@ -79,7 +79,7 @@ export default class CardBack extends Component {
   }
 
   handleClick = (event) => {
-    if (event.target.className==="arrow"){
+    if (event.target.className ==="right arrow icon"){
       this.counter()
     } else if (event.target.className ==="ui button") {
       this.changeCurrentFilter(event.target.id)
@@ -91,25 +91,32 @@ export default class CardBack extends Component {
   render(){
     return (
       <div onClick={this.handleClick} className="ui card">
-
-        <div className="ui buttons">
-
-          {this.props.shared_artists.length > 0 ? <button id="shared_artists" className="ui button">Artists ({this.props.shared_artists.length}) </button> : null}
-          {this.props.shared_albums.length > 0 ? <button id="shared_albums" className="ui button">Albums ({this.props.shared_albums.length}) </button> : null}
-          {this.props.shared_tracks.length > 0 ? <button id="shared_tracks" className="ui button">Tracks</button> : null}
-
-        </div>
-
-      <h1>CardBack</h1>
+        {/* <li className="arrow">ARROW BUTTON</li> */}
       {(this.props.shared_artists.length > 0 || this.props.shared_albums.length > 0 || this.props.shared_tracks.length || 0)
       ?
       <>
+
       <img src={this.state.image_url} height="200" widht="200" alt="album artwork" />
-      <h2>{this.props[this.state.filter][this.state.i]}</h2>
-      <li className="arrow">ARROW BUTTON</li>
+      <div className="content">
+              <div className="header">
+                <span>{this.props[this.state.filter][this.state.i]}</span>
+                <br></br>
+                <span> <i aria-hidden="true" class="right arrow icon"></i></span>
+              </div>
+      </div>
+      <div className="extra content">
+          <div className="ui fluid buttons">
+            {this.props.shared_artists.length > 0 ? <button id="shared_artists" className="ui button">Artists ({this.props.shared_artists.length}) </button> : null}
+            {this.props.shared_albums.length > 0 ? <button id="shared_albums" className="ui button">Albums ({this.props.shared_albums.length}) </button> : null}
+            {this.props.shared_tracks.length > 0 ? <button id="shared_tracks" className="ui button">Tracks ({this.props.shared_tracks.length})</button> : null}
+          </div>
+      </div>
+
       </>
       :
       null}
+
+
 
       </div>
     )
