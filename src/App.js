@@ -15,9 +15,11 @@ class App extends Component {
       short_term_tracks:[],
       long_term_tracks:[],
       me:{},
+      display_name:null,
       allUsers:[],
       railsID: null,
-      all_tracks:[]
+      all_tracks:[],
+      showForm: false
     };
 
   componentDidMount() {
@@ -57,7 +59,8 @@ class App extends Component {
       },
       success: (data) => {
         this.setState({
-          me: data
+          me: data,
+          display_name: data.display_name
         });
       }
     })
@@ -68,13 +71,13 @@ class App extends Component {
   postUser = () => {
     //console.log(this.state.me)
     let image_url = "https://pbs.twimg.com/profile_images/1237550450/mstom_400x400.jpg"
-    let display_name = "tom"
+    // let display_name = "tom"
     if (this.state.me.images.length>0){
       image_url = this.state.me.images[0].url
     }
-    if (this.state.me.display_name !== this.state.me.id) {
-      display_name = this.state.me.display_name
-    }
+    // if (this.state.me.display_name !== this.state.me.id) {
+    //   display_name = this.state.me.display_name
+    // }
     fetch("http://localhost:3001/users", {
       method: "POST",
       headers: {
@@ -82,7 +85,7 @@ class App extends Component {
         "Accept": "application/json"
       },
       body: JSON.stringify({
-        name: display_name,
+        name: this.state.me.display_name,
         image_url: image_url,
         spotify_id: this.state.me.id
       })
@@ -90,7 +93,7 @@ class App extends Component {
       .then(res => res.json())
       .then((data) => {
         console.log("ALL THE DATA", data.id)
-        this.setState({railsID: data.id}, () => console.log("does this thing really work?", this.state.railsID))
+        this.setState({railsID: data.id, display_name: data.name}, () => console.log("does this thing really work?", this.state.railsID))
         this.getShortTermTracks();
       }
       )
@@ -158,6 +161,41 @@ class App extends Component {
     })
   }
 
+  showForm = () => {
+    console.log("click")
+    let newState = this.state.form ? false : true
+    this.setState({form: newState})
+  }
+
+  nameOrForm = () => {
+    if (this.state.form===true){
+      return <form onSubmit={this.updateUser}><input id="newName"placeholder="Enter New Display Name"/><input type="submit" value="submit"/></form>
+    }
+    else {
+      return <h3>{this.state.display_name} logged in</h3>
+    }
+  }
+
+  updateUser = (event) => {
+    event.preventDefault()
+    let newName = document.querySelector("#newName").value
+    fetch(`http://localhost:3001/users/${this.state.railsID}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        name: newName
+      })
+    })
+    .then(res=>res.json())
+    .then(()=>{
+      this.showForm()
+      this.setState({display_name: newName})
+    })
+  }
+
   render() {
     //console.log(this.state)
     return (
@@ -176,6 +214,8 @@ class App extends Component {
           )}
           {this.state.token && (
             <div>
+            {this.nameOrForm()}
+            <button className="ui button" onClick={this.showForm}>edit</button><button className="ui button">delete account</button>
             {/* <h1>Hello</h1> */}
             <UserContainer allUsers={this.state.allUsers} tracks={this.state.all_tracks} railsID={this.state.railsID} currentUserId={this.state.me.id}/>
             {/* <TracksContainer short_term_tracks={this.state.short_term_tracks} long_term_tracks={this.state.long_term_tracks} /> */}
