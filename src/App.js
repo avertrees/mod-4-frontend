@@ -176,7 +176,7 @@ class App extends Component {
           {this.state.token && (
             <div>
             {/* <h1>Hello</h1> */}
-            <UserContainer allUsers={this.state.allUsers} currentUserId={this.state.me.id}/>
+            <UserContainer allUsers={this.state.allUsers} tracks={this.state.all_tracks} currentUserId={this.state.me.id}/>
             {/* <TracksContainer short_term_tracks={this.state.short_term_tracks} long_term_tracks={this.state.long_term_tracks} /> */}
             </div>
         )}

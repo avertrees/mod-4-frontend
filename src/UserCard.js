@@ -12,9 +12,15 @@ export default class UserCard extends Component {
     shared_tracks: [],
     shared_artists: [],
     front: true,
-    filter: "shared_tracks"
+    filter: "shared_artists"
   }
 
+  changeCurrentFilter = (filter) => {
+    //console.log(filter)
+    this.setState({
+      filter
+    }, ()=>console.log(this.state.filter))
+  }
 
   retrieveStats = () => {
     fetch(`http://localhost:3001/users/${this.state.rails_user_id}/compare`, {
@@ -30,7 +36,7 @@ export default class UserCard extends Component {
     })
     .then(resp=>resp.json())
     .then(data => {
-      console.log(data)
+      //console.log(data)
       this.setState({
         //need to change this on backend so that theres a key for image AND name in each object
         shared_albums: data.shared_albums,
@@ -42,6 +48,7 @@ export default class UserCard extends Component {
   }
 
   componentDidMount(){
+    //console.log(this.props.tracks)
     this.retrieveStats()
   }
 
@@ -76,14 +83,14 @@ export default class UserCard extends Component {
       shared_tracks={this.state.shared_tracks} user={this.props.user} renderEntity={this.renderEntity}
       switch={this.frontBackSwitch}/>
     } else {
-      return <CardBack switch={this.frontBackSwitch} shared_albums={this.state.shared_albums} shared_artists={this.state.shared_artists}
-      shared_tracks={this.state.shared_tracks} user={this.props.user} currentFilter={this.state.filter} />
+      return <CardBack tracks_list={this.props.tracks.flat()} switch={this.frontBackSwitch} shared_albums={this.state.shared_albums} shared_artists={this.state.shared_artists}
+        shared_tracks={this.state.shared_tracks} user={this.props.user} currentFilter={this.state.filter} changeCurrentFilter={this.changeCurrentFilter} />
     }
   }
 
   render(){
     return(
-      <div className="ui column">
+      <div className="ui cards">
       {this.frontOrBack()}
       </div>
     )

@@ -1,6 +1,9 @@
-.ui.card{
+.ui.cards>.card{
   align-items: center;
-  background-color: #333;
+  background-color: #282c34;
+  color: white;
+  background: #282c34;
+
 }
 
 .circular--square {
