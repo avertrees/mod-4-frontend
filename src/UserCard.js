@@ -12,15 +12,8 @@ export default class UserCard extends Component {
     shared_tracks: [],
     shared_artists: [],
     front: true,
-    filter: "shared_artists"
   }
 
-  changeCurrentFilter = (filter) => {
-    //console.log(filter)
-    this.setState({
-      filter
-    }, ()=>console.log(this.state.filter))
-  }
 
   retrieveStats = () => {
     fetch(`http://localhost:3001/users/${this.state.rails_user_id}/compare`, {
@@ -84,7 +77,7 @@ export default class UserCard extends Component {
       switch={this.frontBackSwitch}/>
     } else {
       return <CardBack tracks_list={this.props.tracks.flat()} switch={this.frontBackSwitch} shared_albums={this.state.shared_albums} shared_artists={this.state.shared_artists}
-        shared_tracks={this.state.shared_tracks} user={this.props.user} currentFilter={this.state.filter} changeCurrentFilter={this.changeCurrentFilter} />
+        shared_tracks={this.state.shared_tracks} user={this.props.user} />
     }
   }
 
