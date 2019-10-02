@@ -16,6 +16,7 @@ class App extends Component {
       long_term_tracks:[],
       me:{},
       allUsers:[],
+      railsID: null,
       all_tracks:[]
     };
 
@@ -87,10 +88,10 @@ class App extends Component {
       })
     })
       .then(res => res.json())
-      .then(() => {
+      .then((data) => {
+        console.log("ALL THE DATA", data.id)
+        this.setState({railsID: data.id}, () => console.log("does this thing really work?", this.state.railsID))
         this.getShortTermTracks();
-        //this.getLongTermTracks();
-        //this.fetchAllUsers();
       }
       )
       .catch(err => alert(err));
@@ -176,7 +177,7 @@ class App extends Component {
           {this.state.token && (
             <div>
             {/* <h1>Hello</h1> */}
-            <UserContainer allUsers={this.state.allUsers} tracks={this.state.all_tracks} currentUserId={this.state.me.id}/>
+            <UserContainer allUsers={this.state.allUsers} tracks={this.state.all_tracks} railsID={this.state.railsID} currentUserId={this.state.me.id}/>
             {/* <TracksContainer short_term_tracks={this.state.short_term_tracks} long_term_tracks={this.state.long_term_tracks} /> */}
             </div>
         )}
