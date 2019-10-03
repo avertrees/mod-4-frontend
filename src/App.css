@@ -9,6 +9,10 @@
 .ui.horizontal.bulleted.list{
   background-color: #1db954
 }
+.ui.buttons .button{
+  flex: 1 1 auto
+}
+
 .ui.button{
   background:#1db954
 }
