@@ -1,6 +1,6 @@
 .ui.card,.ui.cards>.card:hover{
   background-color: white;
-  background: grey; 
+  background:##49515f; 
   /* box-shadow: 0 1px 3px 0 #1db954, 0 0 0 1px #1db954; */
   /* box-shadow:7 1px 3px 0 #1db954, 0 0 0 1px #1db954; */
 }
