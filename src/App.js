@@ -43,7 +43,7 @@ class App extends Component {
   }
 
   fetchAllUsers = () => {
-    fetch("http://localhost:3001/users")
+    fetch("https://mod4-backend.herokuapp.com/users")
       .then(resp => resp.json())
       .then(data => {
         this.setState({ allUsers: data })
@@ -78,7 +78,7 @@ class App extends Component {
     // if (this.state.me.display_name !== this.state.me.id) {
     //   display_name = this.state.me.display_name
     // }
-    fetch("http://localhost:3001/users", {
+    fetch("https://mod4-backend.herokuapp.com/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -139,7 +139,7 @@ class App extends Component {
   postTracks = () => {
     let user_id = this.state.me.id
     this.state.all_tracks.flat().forEach(e => {
-      fetch("http://localhost:3001/top100_tracks", {
+      fetch("https://mod4-backend.herokuapp.com/top100_tracks", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -179,7 +179,7 @@ class App extends Component {
   updateUser = (event) => {
     event.preventDefault()
     let newName = document.querySelector("#newName").value
-    fetch(`http://localhost:3001/users/${this.state.railsID}`, {
+    fetch(`https://mod4-backend.herokuapp.com/users/${this.state.railsID}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

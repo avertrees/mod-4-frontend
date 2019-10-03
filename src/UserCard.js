@@ -16,7 +16,7 @@ export default class UserCard extends Component {
 
 
   retrieveStats = () => {
-    fetch(`http://localhost:3001/users/${this.state.rails_user_id}/compare`, {
+    fetch(`https://mod4-backend.herokuapp.com/users/${this.state.rails_user_id}/compare`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -9,7 +9,7 @@ export default class UserContainer extends Component {
   }
 
   deleteUser = () => {
-    fetch(`http://localhost:3001/users/${this.props.railsID}`, {
+    fetch(`https://mod4-backend.herokuapp.com/users/${this.props.railsID}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
