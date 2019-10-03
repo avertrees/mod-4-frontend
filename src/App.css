@@ -13,6 +13,10 @@
   flex: 1 1 auto
 }
 
+.ui.grid{
+  padding-top:17px
+}
+
 .ui.button{
   background:#1db954
 }
