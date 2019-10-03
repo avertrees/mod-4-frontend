@@ -13,9 +13,6 @@ export default class CardFront extends Component {
       <span>Number of shared tracks: {this.props.shared_tracks.length}</span> */}
       {/* <span>click to flip</span> */}
       <div className="extra content">
-        <div className="meta"> 
-          click 2 flip
-        </div>
         <div className="ui fluid buttons">
             {this.props.shared_artists.length > 0 ? <button className="ui disabled button">Artists ({this.props.shared_artists.length}) </button> : null}
             {this.props.shared_albums.length > 0 ? <button className="ui disabled button">Albums ({this.props.shared_albums.length}) </button> : null}
