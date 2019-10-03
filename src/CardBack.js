@@ -101,7 +101,7 @@ export default class CardBack extends Component {
               <div className="header">
                 <span>{this.props[this.state.filter][this.state.i]}</span>
                 <br></br>
-                <span> <i aria-hidden="true" class="right arrow icon"></i></span>
+                <span> <i aria-hidden="true" className="right arrow icon"></i></span>
               </div>
       </div>
       <div className="extra content">
