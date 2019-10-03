@@ -90,7 +90,7 @@ export default class CardBack extends Component {
 
   render(){
     return (
-      <div onClick={this.handleClick} className="ui card">
+      <div onClick={this.handleClick} className="ui card back">
         {/* <li className="arrow">ARROW BUTTON</li> */}
       {(this.props.shared_artists.length > 0 || this.props.shared_albums.length > 0 || this.props.shared_tracks.length || 0)
       ?

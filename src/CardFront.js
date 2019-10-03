@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class CardFront extends Component {
   render(){
     return (
-      <div className="ui card" onClick={this.props.switch}>
+      <div className="ui card front" onClick={this.props.switch}>
         <img className="image circular--square" src={this.props.user.image_url} alt={this.props.user.name} /> 
       <div className="content">
         <div className="header">{this.props.user.name} </div>

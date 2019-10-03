@@ -1,9 +1,10 @@
-.ui.card,.ui.cards>.card:hover{
-  background-color: white;
-  background:##49515f; 
-  /* box-shadow: 0 1px 3px 0 #1db954, 0 0 0 1px #1db954; */
-  /* box-shadow:7 1px 3px 0 #1db954, 0 0 0 1px #1db954; */
+.ui.card.front,.ui.cards>.card:hover{
+  background:#49515f; 
 }
+.ui.card.back,.ui.cards>.card:hover{
+  background:#070709; 
+}
+
 
 .ui.card,.ui.cards>.card{
   align-items: center;
