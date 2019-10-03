@@ -1,7 +1,7 @@
-.ui.card.front,.ui.cards>.card:hover{
+.ui.card.front,.ui.cards>.card.front:hover{
   background:#49515f; 
 }
-.ui.card.back,.ui.cards>.card:hover{
+.ui.card.back,.ui.cards>.card.back:hover{
   background:#070709; 
 }
 
