@@ -24,7 +24,7 @@ _**API Reference**_
 * [Spotify API](https://developer.spotify.com/documentation/web-api/) 
 
 ## Installation
-1. Form and clone this repo.
+1. Fork and clone this repo.
 2. run `npm i && npm start` to install all packages and run the application
 
 The instructions for the back-end of this app are [here](https://github.com/avertrees/mod4-backend-api). You'll need to clone/fork both repositories and change the fetch URLs if you want to change the API. Otherwise, the app will make calls to Heroku.
